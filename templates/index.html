@@ -47,7 +47,6 @@
 
 
 
-
         <h3>&nbsp;</h3>
 
 <h2><span style="font-size:18px">About</span></h2>
@@ -211,8 +210,8 @@ Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a>
 <hr />
 <h3>Local install</h3>
 
-<p>Prerequisites:&nbsp;<br />
-Python3, pip3, Virtualenv</p>
+<p><strong>Prerequisites:</strong>&nbsp;<br />
+<em>Python3, pip3, Virtualenv</em></p>
 
 <p>To install and run the app locally follow the below instruction:</p>
 
@@ -227,14 +226,32 @@ Python3, pip3, Virtualenv</p>
 		<li>Install the required packages: <em>pip install -r requirements.txt</em></li>
 	</ol>
 	</li>
-	<li>Start the app: <em>./app.py</em></li>
+	<li>Start the app: python&nbsp;<em>app.py</em></li>
+	<li>Open the app in browser:&nbsp;<a href="http://localhost:8080">http://localhost:8080</a></li>
+	<li>&nbsp;</li>
 </ol>
 
 <p>&nbsp;</p>
 
-<h3>Run in Docker container</h3>
+<h3>Run the application in Docker container</h3>
 
-<p>To run the app in docker you can build the docker image and run it.</p>
+<p>Dockerization of the application streamlines the deployment and management by providing a consistent and efficient runtime environment. It&#39;s helping with dependencies, environment inconsistencies, and scalability.</p>
+
+<p><strong>Prerequisites:&nbsp;</strong><br />
+<em>Docker</em></p>
+
+<p>To run the app in docker you will need to build the docker image.</p>
+
+<ol>
+	<li>Clone the repository on&nbsp;local or remote machine.</li>
+	<li>Run the following command to build the image:&nbsp;&nbsp;<em>docker build . -t user_api_app</em></li>
+	<li>Start the app with docker:&nbsp;<em>docker run --name FLASK_APP -p 8080:8080 -v .:/app user_api_app</em></li>
+	<li>Open the app in browser:&nbsp;<a href="http://localhost:8080">http://localhost:8080</a></li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
 
 <p>&nbsp;</p>
 

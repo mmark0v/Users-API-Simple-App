@@ -1,5 +1,3 @@
-#!.env/bin/python
-
 from flask import Flask, request, render_template, jsonify
 from flask_restful import Resource, Api, marshal_with, fields
 from flask_sqlalchemy import SQLAlchemy
@@ -112,7 +110,7 @@ def swagger():
 
 
 if __name__ == '__main__':
-    app.run(port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
 
 
 

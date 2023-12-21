@@ -145,6 +145,16 @@ To install and run the app locally follow the below instruction:
     4.  Install the required packages: _pip install -r requirements.txt_
 4.  Start the app: _./app.py_
 
-### Run in Docker container
+### Run the application in Docker container
 
-To run the app in docker you can build the docker image and run it.
+Dockerization of the application streamlines the deployment and management by providing a consistent and efficient runtime environment. It's helping with dependencies, environment inconsistencies, and scalability.
+
+**Prerequisites:**   
+_Docker_
+
+To run the app in docker you will need to build the docker image.
+
+1.  Clone the repository on local or remote machine.
+2.  Run the following command to build the image:  _docker build . -t user\_api\_app_
+3.  Start the app with docker: _docker run --name FLASK\_APP -p 8080:8080 -v .:/app user\_api\_app_
+4.  Open the app in browser: [http://localhost:8080](http://localhost:8080)
