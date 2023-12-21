@@ -1,5 +1,4 @@
-# Users API Appication with Swagger.
-This is a simple Flask web application for user management.
+# Users API Application with Swagger.
 
 About
 -----
@@ -57,7 +56,7 @@ Create a new User: 
 >     {
 >       "first_name": "Tony",
 >       "last_name": "Stak",
->       "username": "aironman"
+>       "username": "ironman"
 >     }
 
 > Response: 200 OK
@@ -66,7 +65,7 @@ Create a new User: 
 >       "id": 1,
 >       "first_name": "Tony",
 >       "last_name": "Stak",
->       "username": "aironman"
+>       "username": "ironman"
 >     }
 
 List all users:
@@ -78,7 +77,7 @@ List all users:
 >     [	
 >     	{
 >             "id": 1,
->     		"username": "aironman",
+>             "username": "ironman",
 >             "first_name": "Tony",
 >             "last_name": "Stak"
 >     
