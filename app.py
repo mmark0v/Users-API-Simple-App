@@ -1,4 +1,4 @@
-#!env/bin/python
+#!.env/bin/python
 
 from flask import Flask, request, render_template, jsonify
 from flask_restful import Resource, Api, marshal_with, fields
