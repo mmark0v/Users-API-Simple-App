@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container {
+        height: 300px;
+        position: relative;
+        border: 0px solid green;
+        }
+
+        .vertical-center {
+        margin: 0;
+        position: absolute;
+        top: 150%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        }
+
+        h1 {color:rgb(43, 43, 43);}
+        p {color:rgb(50, 50, 50);}
+        body  {background-image: url({{ url_for('static', filename='bg.png') }});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            }
+      </style>
+    <title>Users App</title>
+
+</head>
+
+
+
+
+
+<body text="green" bgcolor="#DBDBDB">
+
+    
+<div class="container">
+</div>
+
+
+<center>
+        <h1>Welcome to my Users app!</h1><br>
+        <h3><a href ='/api/users'>Click here to list All users.</a></h3>
+        <h3><a href ='/api/new_user'>Click here to ADD a new user.</a></h3>
+        <br><br>
+
+
+        <form  method="POST"  action="/api/new_user" name="new_user">
+        <p><label for="username">Username:</label>
+        <input type="text" name="name[username]" id="username"></p>
+
+        <p><label for="first_name">First Name:</label>
+        <input type="text" name="name[first_name]" id="first_name"></p>
+
+        <p><label for="last_name">Last Name:</label>
+        <input type="text" name="name[last_name]" id="last_name"></p>
+
+        <input value="Submit" type="submit" onclick="submitform()">
+    </form>
+
+    </center>
+
+
+    
+</body>
+
+<script>
+    encode.onclick = async (e) => {
+        let response = await fetch('http://localhost:8482/encode', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+        })
+
+        let text = await response.text(); // read response body as text
+        data = JSON.parse(text);
+        document.querySelector("#encoded").innerHTML = text;
+      //  document.querySelector("#encoded").innerHTML = `First name = ${data.firstname} <br/> 
+      //                                                  Last name = ${data.lastname} <br/>
+      //                                                  Age    = ${data.age}`
+    };
+
+    formElem.onsubmit = async (e) => {
+      e.preventDefault();
+      var form = document.querySelector("#formElem");
+     // var form = document.forms[0];
+
+        data = {
+          firstname : form.querySelector('input[name="firstname"]').value,
+          lastname : form.querySelector('input[name="lastname"]').value,
+          age : 5
+        }
+
+        let response = await fetch('http://localhost:8482/decode', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+        })
+
+        let text = await response.text(); // read response body as text
+        document.querySelector("#decoded").innerHTML = text;
+    };
+</script>
+
+<script type="text/javascript">
+    function submitform(){
+        alert("Sending Json");
+        var xhr = new XMLHttpRequest();
+        let form = document.forms[0];
+        xhr.open(form.method, form.action, true);
+        xhr.open(form.method, form.action, true);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        var j = {
+            "first_name":"binchen",
+            "last_name":"heris",
+        };
+        xhr.send(JSON.stringify(j));
+</script>
+
+</html>

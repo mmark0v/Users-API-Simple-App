@@ -1,0 +1,210 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Users Database APP",
+      "description": "An API that List, Add, Uopdate and Delete Users from database.",
+      "version": "1.0"
+    },
+    "basePath": "/api",
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/users": {
+        "get": {
+          "summary": "Returns a list of all users in the database.",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "List of existing users.",
+              "schema": {
+                "type": "object",
+                "properties":{ 
+                  "username": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/new_user": {
+        "post": {
+          "summary": "Create a New user in the database.",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {"in": "body",
+            "name": "User",
+            "description": "Provide 'Username', 'First Name' and 'Last Name' for the new user.",
+            "schema": {
+                "type":"object",
+                "required":[
+                        "username",
+                        "first_name",
+                        "last_name"
+                        ],
+                    "example": {
+                        "username":"string",
+                        "first_name":"string",
+                        "last_name":"string"}
+                    },
+                "properties":{
+                    "username":{"type":"string"},
+                    "first_name":{"type":"string"},
+                    "last_name":{"type":"string"}
+                    }
+            }
+          ] ,
+          "responses": {
+            "200": {
+              "description": "List of existing users.",
+              "schema": {
+                "type": "object",
+                "properties":{ 
+                  "username": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/user/id={ID}": {
+        "put": {
+          "summary": "Update an existing user.",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            
+            {
+             "in": "path",
+             "style": "simple",
+             "explode": "true",
+             "name": "ID",
+             "required": "true",
+             "type": "integer",
+             "description": "Provide the ID of the user that you are updating."
+            },
+
+            {"in": "body",
+            "name": "User",
+            "description": "Update any of the user fields below",
+            "schema": {
+                "type":"object",
+                "required":[
+                        "username",
+                        "first_name",
+                        "last_name"
+                        ],
+                    "example": {
+                        "username":"Username",
+                        "first_name":"First Name",
+                        "last_name":"Last Name"}
+                    },
+                "properties":{
+                    "username":{"type":"string"},
+                    "first_name":{"type":"string"},
+                    "last_name":{"type":"string"}
+                    }
+            }
+          ] ,
+          "responses": {
+            "200": {
+              "description": "List of users.",
+              "schema": {
+                "type": "object",
+                "properties":{ 
+                  "username": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/user/delete/id={ID}": {
+        "delete": {
+          "summary": "Delete a user from the database.",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            
+            {
+             "in": "path",
+             "style": "simple",
+             "explode": "true",
+             "name": "ID",
+             "required": "true",
+             "type": "integer",
+             "description": "Provide the ID of the user that you are deleting."
+            }
+
+          ] ,
+          "responses": {
+            "200": {
+              "description": "List of users.",
+              "schema": {
+                "type": "object",
+                "properties":{ 
+                  "username": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
