@@ -1,167 +1,147 @@
-# Users API Appication with Swagger.
-This is a simple Flask web application for user management.
+Documentation
+-------------
 
-<p>&nbsp;</p>
+* * *
 
-<h2>Documentation</h2>
+### About
 
+This simple python app is build on the Flask web framwork.
 
-<h3><span style="font-size:18px">About</span></h3>
+The purpose of the app is to manage simple user database through exposed API endpoints for CRUD operations.
 
-<p>This simple python app is build on the Flask web framwork.</p>
+### Technical characteristics
 
-<p>The purpose of the app is to manage simple user database through exposed API endpoints for CRUD operations.</p>
+**Code base:** Python3, CSS, HTML, SQLite, Flask, Swagger.
 
-<h3><span style="font-size:18px">Technical characteristics</span></h3>
+The backend environment is running Python 3.11.6 in a virtualenv.  
+The users data is stored in an sqlite instance db file users.db.   
+Swagger is run by a Flask, API documentation is written in the swagger.json file.  
+The fronend homepage is a simple HTML which Flusk is running as a template and loads the CSS code from a static directory.    
+The webserver is running on port 80.
 
-<p><strong>Code base: </strong>Python3, CSS, HTML, SQLite, Flask, Swagger.</p>
+**Python virtualenv requirements:**  
+aniso8601==9.0.1  
+blinker==1.7.0  
+click==8.1.7  
+Flask==3.0.0  
+Flask-RESTful==0.3.10  
+Flask-SQLAlchemy==3.1.1  
+flask-swagger==0.2.14  
+flask-swagger-ui==4.11.1  
+itsdangerous==2.1.2  
+Jinja2==3.1.2  
+MarkupSafe==2.1.3  
+pytz==2023.3.post1  
+PyYAML==6.0.1  
+six==1.16.0  
+SQLAlchemy==2.0.23  
+typing\_extensions==4.9.0  
+Werkzeug==3.0.1
 
-<p>The backend environment is running Python 3.11.6 in a virtualenv.<br />
-The users data is stored in an sqlite instance db file users.db.&nbsp;<br />
-Swagger is run by a Flask, API documentation is written in the swagger.json file.<br />
-The fronend homepage is a simple HTML which Flusk is running as a template and loads the CSS code from a static directory.&nbsp;&nbsp;<br />
-The webserver is running on port 80.</p>
+### API endpoints
 
-<p><strong>Python virtualenv&nbsp;requirements:</strong><br />
-aniso8601==9.0.1<br />
-blinker==1.7.0<br />
-click==8.1.7<br />
-Flask==3.0.0<br />
-Flask-RESTful==0.3.10<br />
-Flask-SQLAlchemy==3.1.1<br />
-flask-swagger==0.2.14<br />
-flask-swagger-ui==4.11.1<br />
-itsdangerous==2.1.2<br />
-Jinja2==3.1.2<br />
-MarkupSafe==2.1.3<br />
-pytz==2023.3.post1<br />
-PyYAML==6.0.1<br />
-six==1.16.0<br />
-SQLAlchemy==2.0.23<br />
-typing_extensions==4.9.0<br />
-Werkzeug==3.0.1</p>
+They are five endpoints exposed for managing the users in the database.  
+Request and responce content type is in json format.  
+Server: [http://localhost:8080](http://localhost:8080/api/users)
 
-<p>&nbsp;</p>
+Create a new User: 
 
-<h3>API endpoints</h3>
+    /api/new_user
 
-<p>They are five endpoints exposed for managing the users in the database.<br />
-Request and responce content type is in json format.<br />
-Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a></p>
+> Example payload: Body
+> 
+>     {
+>       "first_name": "Tony",
+>       "last_name": "Stak",
+>       "username": "aironman"
+>     }
 
-<p>Create a new User:&nbsp;</p>
+> Response: 200 OK
+> 
+>     {
+>       "id": 1,
+>       "first_name": "Tony",
+>       "last_name": "Stak",
+>       "username": "aironman"
+>     }
 
-<pre>
-<code class="language-html">/api/new_user</code></pre>
+List all users:
 
-<blockquote>
-<p>Example payload: Body</p>
+    /api/users
 
-<pre>
-<code class="language-html">{
-  "first_name": "Tony",
-  "last_name": "Stak",
-  "username": "aironman"
-}</code></pre>
-</blockquote>
+>  Response: 200 OK
+> 
+>     [	
+>     	{
+>             "id": 1,
+>     		"username": "aironman",
+>             "first_name": "Tony",
+>             "last_name": "Stak"
+>     
+>         }
+>         {
+>             "id": 2,
+>             "username": "jbond",
+>             "first_name": "James",
+>             "last_name": "Bond"
+>         }, {
+>             "id": 3,
+>             "username": "malin",
+>             "first_name": "Malin",
+>             "last_name": "Markov"
+>         }
+>     ]
 
-<blockquote>
-<p>Response: 200 OK</p>
+List user by ID: 
 
-<pre>
-<code class="language-html">{
-  "id": 1,
-  "first_name": "Tony",
-  "last_name": "Stak",
-  "username": "aironman"
-}</code></pre>
-</blockquote>
+    /api/users/user/id={int}
 
-<p>&nbsp;</p>
+Update a User: 
 
-<p>List all users:</p>
+    /api/users/user/id={int}
 
-<pre>
-<code class="language-html">/api/users</code></pre>
+>  Example payload: Body
+> 
+>     {
+>       "first_name": "Tony",
+>       "last_name": "Stak",
+>       "username": "avenger"
+>     }
 
-<blockquote>
-<p>&nbsp;Response: 200 OK</p>
+> Response: 200 OK
+> 
+>     {
+>       "id": 1,
+>       "first_name": "Tony",
+>       "last_name": "Stak",
+>       "username": "avenger"
+>     }
 
-<pre>
-<code class="language-html">[	
-	{
-        "id": 1,
-		"username": "aironman",
-        "first_name": "Tony",
-        "last_name": "Stak"
+Delete a User: 
 
-    }
-    {
-        "id": 2,
-        "username": "jbond",
-        "first_name": "James",
-        "last_name": "Bond"
-    }, {
-        "id": 3,
-        "username": "malin",
-        "first_name": "Malin",
-        "last_name": "Markov"
-    }
-]</code></pre>
-</blockquote>
+    /api/users/user/delete/id={int}
 
-<p>&nbsp;</p>
+Instalation
+-----------
 
-<p>List user by ID:&nbsp;</p>
+* * *
 
-<pre>
-<code class="language-html">/api/users/user/id={int}</code></pre>
+### Local install
 
-<p>&nbsp;</p>
+Prerequisites:   
+Python3, pip3, Virtualenv
 
-<p>Update a User:&nbsp;</p>
+To install and run the app locally follow the below instruction:
 
-<pre>
-<code class="language-html">/api/users/user/id={int}</code></pre>
+1.  Clone the repository on your local machine.
+2.  For Linux and Mac run the setup.sh bash script: _./setup.sh_
+3.  For Windows: 
+    1.  Install virtualenv: _pip install virtualenv_
+    2.  Create virtual environment: _virtualenv .env_
+    3.  Activate virtualenv: _\\.env\\scripts\\activate_
+    4.  Install the required packages: _pip install -r requirements.txt_
+4.  Start the app: _./app.py_
 
-<blockquote>
-<p>&nbsp;Example payload: Body</p>
+### Run in Docker container
 
-<pre>
-<code class="language-html">{
-  "first_name": "Tony",
-  "last_name": "Stak",
-  "username": "avenger"
-}</code></pre>
-</blockquote>
-
-<blockquote>
-<p>Response: 200 OK</p>
-
-<pre>
-<code class="language-html">{
-  "id": 1,
-  "first_name": "Tony",
-  "last_name": "Stak",
-  "username": "avenger"
-}</code></pre>
-</blockquote>
-
-<p>&nbsp;</p>
-
-<p>Delete a User:&nbsp;</p>
-
-<pre>
-<code class="language-html">/api/users/user/delete/id={int}</code></pre>
-
-<p>&nbsp;</p>
-
-<h2>Instalation</h2>
-<p>To install and run the app follow the below instruction:</p>
-
-<ol>
-	<li>A</li>
-	<li>b</li>
-</ol>
-
-<p>&nbsp;</p>
+To run the app in docker you can build the docker image and run it.
