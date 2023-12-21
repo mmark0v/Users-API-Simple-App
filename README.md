@@ -1,13 +1,15 @@
-Documentation
--------------
-
-* * *
+# Users API Appication with Swagger.
+This is a simple Flask web application for user management.
 
 ### About
 
 This simple python app is build on the Flask web framwork.
 
 The purpose of the app is to manage simple user database through exposed API endpoints for CRUD operations.
+
+Documentation
+-------------
+
 
 ### Technical characteristics
 
@@ -124,7 +126,6 @@ Delete a User: 
 Instalation
 -----------
 
-* * *
 
 ### Local install
 

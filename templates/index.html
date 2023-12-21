@@ -42,17 +42,17 @@
 
         <p>&nbsp;</p>
 
-        <p>&nbsp;</p>
-
-<h2>Documentation</h2>
-
-<hr />
-<h3><span style="font-size:18px">About</span></h3>
+        <h3><span style="font-size:18px">About</span></h3>
 
 <p>This simple python app is build on the Flask web framwork.</p>
 
 <p>The purpose of the app is to manage simple user database through exposed API endpoints for CRUD operations.</p>
 
+<p>&nbsp;</p>
+
+<h2>Documentation</h2>
+
+<hr />
 <h3><span style="font-size:18px">Technical characteristics</span></h3>
 
 <p><strong>Code base: </strong>Python3, CSS, HTML, SQLite, Flask, Swagger.</p>
@@ -60,8 +60,8 @@
 <p>The backend environment is running Python 3.11.6 in a virtualenv.<br />
 The users data is stored in an sqlite instance db file users.db.&nbsp;<br />
 Swagger is run by a Flask, API documentation is written in the swagger.json file.<br />
-The fronend homepage is a simple HTML which Flusk is running as a template and loads the CSS code from a static directory.&nbsp;&nbsp;<br />
-The webserver is running on port 80.</p>
+The fronend homepage is a simple HTML page, Flusk loads the CSS and the index from a static directory.&nbsp;&nbsp;<br />
+The webserver is running on <strong>port 8080</strong>.</p>
 
 <p><strong>Python virtualenv&nbsp;requirements:</strong><br />
 aniso8601==9.0.1<br />
@@ -87,7 +87,7 @@ Werkzeug==3.0.1</p>
 <h3>API endpoints</h3>
 
 <p>They are five endpoints exposed for managing the users in the database.<br />
-Request and responce content type is in json format.<br />
+Request and responce content type is in JSON.<br />
 Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a></p>
 
 <p>Create a new User:&nbsp;</p>
@@ -208,7 +208,7 @@ Python3, pip3, Virtualenv</p>
 <p>To install and run the app locally follow the below instruction:</p>
 
 <ol>
-	<li>Clone this repository on your local machine</li>
+	<li>Clone the repository on your local machine.</li>
 	<li>For Linux and Mac&nbsp;run the setup.sh bash script: <em>./setup.sh</em></li>
 	<li>For Windows:&nbsp;
 	<ol>
