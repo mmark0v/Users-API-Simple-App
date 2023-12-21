@@ -16,8 +16,8 @@ The purpose of the app is to manage simple user database through exposed API end
 The backend environment is running Python 3.11.6 in a virtualenv.  
 The users data is stored in an sqlite instance db file users.db.   
 Swagger is run by a Flask, API documentation is written in the swagger.json file.  
-The fronend homepage is a simple HTML which Flusk is running as a template and loads the CSS code from a static directory.    
-The webserver is running on port 80.
+The fronend homepage is a simple HTML page, Flusk loads the CSS and the index from a static directory.    
+The webserver is running on **port 8080**.
 
 **Python virtualenv requirements:**  
 aniso8601==9.0.1  
@@ -41,7 +41,7 @@ Werkzeug==3.0.1
 ### API endpoints
 
 They are five endpoints exposed for managing the users in the database.  
-Request and responce content type is in json format.  
+Request and responce content type is in JSON.  
 Server: [http://localhost:8080](http://localhost:8080/api/users)
 
 Create a new User: 
