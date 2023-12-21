@@ -1,7 +1,9 @@
 # Users API Appication with Swagger.
 This is a simple Flask web application for user management.
 
-### About
+About
+-----
+
 
 This simple python app is build on the Flask web framwork.
 
