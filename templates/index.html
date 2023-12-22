@@ -45,11 +45,9 @@
 
 
 
-
-
         <h3>&nbsp;</h3>
 
-<h2><span style="font-size:18px">About</span></h2>
+<h2>About</h2>
 
 <hr />
 <p>This simple python app is build on the Flask web framwork.</p>
@@ -207,9 +205,9 @@ Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a>
 
 <h2>Instalation</h2>
 
-<hr />
 <h3>Local install</h3>
 
+<hr />
 <p><strong>Prerequisites:</strong>&nbsp;<br />
 <em>Python3, pip3, Virtualenv</em></p>
 
@@ -227,15 +225,19 @@ Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a>
 	</ol>
 	</li>
 	<li>Start the app: python&nbsp;<em>app.py</em></li>
-	<li>Open the app in browser:&nbsp;<a href="http://localhost:8080">http://localhost:8080</a></li>
-	<li>&nbsp;</li>
+	<li>Open the application in the browser:&nbsp;<a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
 </ol>
+
+<p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
 <h3>Run the application in Docker container</h3>
 
-<p>Dockerization of the application streamlines the deployment and management by providing a consistent and efficient runtime environment. It&#39;s helping with dependencies, environment inconsistencies, and scalability.</p>
+<hr />
+<p>Dockerization of the application streamlines the deployment and management<br />
+by providing a consistent and efficient runtime environment.<br />
+It&#39;s helping with dependencies, environment inconsistencies, and scalability.</p>
 
 <p><strong>Prerequisites:&nbsp;</strong><br />
 <em>Docker</em></p>
@@ -246,18 +248,86 @@ Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a>
 	<li>Clone the repository on&nbsp;local or remote machine.</li>
 	<li>Run the following command to build the image:&nbsp;&nbsp;<em>docker build . -t user_api_app</em></li>
 	<li>Start the app with docker:&nbsp;<em>docker run --name FLASK_APP -p 8080:8080 -v .:/app user_api_app</em></li>
-	<li>Open the app in browser:&nbsp;<a href="http://localhost:8080">http://localhost:8080</a></li>
+	<li>Open the application in the browser:&nbsp;<a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
 </ol>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p>&nbsp;</p>
+<h3>Run the application in a Kuberneties Cluster</h3>
 
-<p>&nbsp;</p>
+<hr />
+<p>The benefits of using Kubernetes is to automate the deployment, scaling,<br />
+and management of applications running in containers.<br />
+It provides a platform for orchestrating and coordinating containers across a cluster of machines.</p>
+
+<p><strong>Prerequisites:&nbsp;</strong><br />
+<em>Docker, Minikube</em></p>
+
+<p>To run the app in a Kuberneties cluster you will create a single cluster node for the deployment and the servies.&nbsp;</p>
+
+<ol>
+	<li>Clone the repository on&nbsp;local or remote machine.</li>
+	<li>Install <a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a> and <a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank">Minikube</a>.</li>
+	<li>Set an alias for the minikube to ease with the kubectl commands:&nbsp;
+	<pre>
+<code>alias kubectl="minikube kubectl --"</code></pre>
+	</li>
+	<li>Start a Kuberneties cluster:
+	<pre>
+<code>minikube start</code></pre>
+	</li>
+	<li>Deploy the application to the default namespace by using the deployment yaml file located in the repository:
+	<pre>
+<code class="language-bash">kubectl apply -f user-api-app-deployment.yaml</code></pre>
+
+	<p>Kuberneties will create the deployment and will start one replica pod.</p>
+
+	<ul>
+		<li>
+		<p>Confirm that the pod is running.</p>
+
+		<pre>
+<code class="language-bash">$ kubectl get po
+NAME                            READY   STATUS    RESTARTS   AGE
+user-api-app-58598c4b89-86k6k   1/1     Running   0          51s</code></pre>
+		</li>
+	</ul>
+	</li>
+	<li>Deploy the application services to the default namespace by using the services yaml file located in the repository:
+	<pre>
+<code class="language-bash">kubectl apply -f user-api-app-service.yaml</code></pre>
+	Kuberneties will create the service that will expose the port 8080 from the container to the cluster.
+
+	<ul>
+		<li>
+		<p>Confirm that the <em>user-api-app</em> service was created and running.</p>
+
+		<pre>
+<code class="language-bash">$ kubectl get svc
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes     ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP          10m
+user-api-app   NodePort    10.101.169.14   &lt;none&gt;        8080:30104/TCP   3m</code></pre>
+		</li>
+	</ul>
+	</li>
+	<li>Forward the port 8080 for the service to bevome reachable on the localhost:
+	<pre>
+<code class="language-bash">nohup kubectl port-forward service/user-api-app 8080:8080 &amp;</code></pre>
+	</li>
+	<li>Test the connection:
+	<pre>
+<code class="language-bash">$ nc -zv localhost 8080
+Connection to localhost port 8080 [tcp/http-alt] succeeded!</code></pre>
+	</li>
+	<li>The application is now available at&nbsp;<a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+</ol>
 
 
+
+
+</div>
       
 </body>
 </html>
