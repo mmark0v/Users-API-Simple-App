@@ -2,10 +2,10 @@ name: CICD Workflow
 
 on:
   workflow_dispatch
-  # push:
-  #   branches: [ "main" ]
-  # pull_request:
-  #   branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 env:
   # DOCKER BUILD variables
@@ -109,4 +109,41 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-   
+
+  minikube_deploy:
+    # Deploy locally to minikube (require the image to be re-build locally)
+    runs-on: ubuntu-latest
+    name: build app and deploy to minikube
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
+
+    - name: Try the cluster !
+      run: kubectl get pods -A
+
+    - name: Build image
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        docker build -f ./Dockerfile -t local/user_api_app .
+        echo -n "verifying images:"
+        docker images        
+    
+    - name: Deploy to minikube
+      run:
+        minikube kubectl -- apply -f deploy-app-local.yaml
+
+    - name: Test service URLs
+      run: |
+        minikube service list
+        minikube kubectl -- get po
+        sleep 10
+        minikube kubectl -- get po
+        echo "------------------ opening the service ------------------"
+        minikube kubectl -- port-forward services/user-api-app 8080:8080 &
+        echo "------------------ testing the server ------------------"
+        nc -zv localhost 8080  
+        if [ $? = "0" ]; then echo -e "\n\n------------------ Deployment Succesfull ------------------\n\n";fi                
+  

@@ -39,7 +39,7 @@ jobs:
         sleep 10
         minikube kubectl -- get po
         echo "------------------ opening the service ------------------"
-        minikube kubectl -- kubectl port-forward services/user-api-app 8080:8080 &
+        minikube kubectl -- port-forward services/user-api-app 8080:8080 &
         echo "------------------ testing the server ------------------"
         nc -zv localhost 8080  
         if [ $? = "0" ]; then echo -e "\n\n------------------ Deployment Succesfull ------------------\n\n";fi      
