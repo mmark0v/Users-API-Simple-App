@@ -15,13 +15,13 @@ Documentation
 
 **Code base:** Python3, CSS, HTML, SQLite, Flask, Swagger.
 
-The backend environment is running Python 3.11.6 in a virtualenv.  
+The backend environment is running Python 3.11.6.  
 The users data is stored in an sqlite instance db file users.db.   
 Swagger is run by a Flask, API documentation is written in the swagger.json file.  
 The fronend homepage is a simple HTML page, Flusk loads the CSS and the index from a static directory.    
 The webserver is running on **port 8080**.
 
-**Python virtualenv requirements:**  
+**Python requirements:**  
 aniso8601==9.0.1  
 blinker==1.7.0  
 click==8.1.7  
@@ -216,47 +216,94 @@ To run the app in a Kuberneties cluster you will create a single cluster node fo
     
 8.  The application is now available at [http://localhost:8080](http://localhost:8080)
 
+  
+
 Continuous integration / Continuous deployment
+
 -----------
 
+  
+  
 
-This GitHub project has been setup for CI/CD processes with the use of GitGub Actions. 
+This GitHub project has been setup for CI/CD processes with the use of GitGub Actions.
+
+  
 
 Requirements to run the workflow:
 
-1.  Secrets and Variables configured in GitHub settings as follows:  
-    Secrets:    DOCKER\_PASSWORD = <your docker hub password>  
-    Variables:
-    1.  DOCKER\_USERNAME = <your docker hub username>
-    2.  PLATFORM = \[<linux/arm/v8>, <linux/amd64>, <other>\]  
-        Specify the platfrom for the image that needs to be build on. (currently configured to linux/arm64/v8)
+  
+
+1. Secrets and Variables configured in GitHub settings as follows:
+
+Secrets: 
+
+    DOCKER\_PASSWORD = \[your docker hub password\]
+
+Variables:
+
+    DOCKER\_USERNAME = \[your docker hub username\]
+    
+    PLATFORM = \[linux/arm/v8, linux/amd64, other\]
+
+Specify the platfrom for the image that needs to be build on. (currently configured to linux/arm64/v8)
+
+  ---
 
 The pipline runs in three stages using the CICD.yaml file located at **.github/workflows/** directory.
 
-**Stages 1: Build**  
-This stage builds the python API app code and tests the application.  
-Python installs the dependencies packages from the requirements.txt file.   
-Completing of this stage will ensure the code is checked and the application is running ok before the next stage.
+  
 
-**Stages 2: Dockerize**  
-This stage builds a Docker image of the API app using a Dockerfile.  
-The docker image is published to my public DockerHub repository [mmark0v/user\_api-app](https://hub.docker.com/repository/docker/mmark0v/user_api_app)   
-The repository is configured as variable so you can provide your own repository variables.   
-Once this stage is complete the new code is pushed to a new docker image with tag: _latest_
+**Stages 1: Build**
 
-**Stages 3: Deploy**  
-This stage is deploying the API app to Kuberneties cluster.   
-At this stage I'm using Minikube with locally build container image.   
-Deployment is sucesfull once the application is reachable on port 8080
-
-Each stage can also be run manually by running each one of the workflows in the Actions.   
-.github/workflows/[deploy\_app.yaml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/deploy_app.yaml "deploy_app.yaml")  
-.github/workflows/[docker\_publish.yml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/docker_publish.yml "docker_publish.yml")  
-.github/workflows/[python-app.yml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/python-app.yml "python-app.yml")
+> This stage builds the python API app code and tests the application.
+> 
+> Python installs the dependencies packages from the requirements.txt
+> file.
+> 
+> Completing of this stage will ensure the code is checked and the
+> application is running ok before the next stage.
 
   
- 
+
+**Stages 2: Dockerize**
+
+> This stage builds a Docker image of the API app using a Dockerfile.
+> 
+> The docker image is published to my public DockerHub repository
+> [mmark0v/user\_api-app](https://hub.docker.com/repository/docker/mmark0v/user_api_app)
+> 
+> The repository is configured as variable so you can provide your own
+> repository variables.
+> 
+> Once this stage is complete the new code is pushed to a new docker
+> image with tag: _latest_
+
+  
+
+**Stages 3: Deploy**
+
+> This stage is deploying the API app to Kuberneties cluster.
+> 
+> At this stage I'm using Minikube with locally build container image.
+> 
+> Deployment is sucesfull once the application is reachable on port 8080
+
+  
+
+Each stage can also be run manually by running each one of the workflows in the Actions.
+
+.github/workflows/[deploy\_app.yaml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/deploy_app.yaml  "deploy_app.yaml")
+
+.github/workflows/[docker\_publish.yml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/docker_publish.yml  "docker_publish.yml")
+
+.github/workflows/[python-app.yml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/python-app.yml  "python-app.yml")
+
+  
+
+  
 
 * * *
+
+  
 
 2023 AppV1.2 - [mmark0v](https://github.com/mmark0v)
