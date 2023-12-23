@@ -1,3 +1,9 @@
+---
+title: DEPLOYMENTS
+layout: template
+filename: DEPLOYMENTS.md
+--- 
+
 Deployments
 -----------
 
