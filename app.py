@@ -3,6 +3,7 @@ from flask_restful import Resource, Api, marshal_with, fields
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger import swagger
 from flask_swagger_ui import get_swaggerui_blueprint
+import os
 import json
 
 app = Flask(__name__)
@@ -110,7 +111,9 @@ def swagger():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    port = int(os.environ.get("PORT", 8080))
+    print('* OS Port: ', port)
+    app.run(host='0.0.0.0', port=port, debug=True)
 
 
 
