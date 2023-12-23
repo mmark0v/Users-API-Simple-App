@@ -50,7 +50,7 @@ jobs:
 
   docker_build:
     # Build and push the image to remote repository
-    needs: build_python_app
+    needs: python_build_test
     runs-on: ubuntu-latest
     permissions:
       contents: read
