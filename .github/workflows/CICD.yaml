@@ -1,4 +1,4 @@
-name: cicd python application
+name: CICD Workflow 
 
 on:
   # workflow_dispatch
@@ -17,7 +17,7 @@ env:
 
 
 jobs:
-  build_python_app:
+  python_build_test:
 
     runs-on: ubuntu-latest
     permissions:
