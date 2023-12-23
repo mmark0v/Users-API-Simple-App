@@ -22,8 +22,7 @@ jobs:
     
     - name: Deploy to minikube
       run:
-        kubectl apply -f user-api-app-deployment.yaml
-        kubectl apply -f user-api-app-service.yaml
+        minikube kubectl -- apply -f user-api-app-deployment.yaml -f user-api-app-service.yaml
 
     - name: Test service URLs
       run: |
