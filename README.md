@@ -1,7 +1,9 @@
+
 ![](https://ckeditor.com/apps/ckfinder/userfiles/files/image(4).png)
 
 About
 -----
+
 This simple python app is build on the Flask web framwork.
 
 The function of the app is to manage simple user database through exposed API endpoints for CRUD operations.
@@ -9,18 +11,17 @@ The function of the app is to manage simple user database through exposed API en
 Documentation
 -------------
 
-
 ### Technical characteristics
 
 **Code base:** Python3, CSS, HTML, SQLite, Flask, Swagger.
 
 The backend environment is running Python 3.11.6 in a virtualenv.  
-The users data is stored in an sqlite instance db file users.db.   
+The users data is stored in an sqlite instance db file users.db.   
 Swagger is run by a Flask, API documentation is written in the swagger.json file.  
-The fronend homepage is a simple HTML page, Flusk loads the CSS and the index from a static directory.    
+The fronend homepage is a simple HTML page, Flusk loads the CSS and the index from a static directory.    
 The webserver is running on **port 8080**.
 
-**Python virtualenv requirements:**  
+**Python virtualenv requirements:**  
 aniso8601==9.0.1  
 blinker==1.7.0  
 click==8.1.7  
@@ -43,9 +44,9 @@ Werkzeug==3.0.1
 
 They are five endpoints exposed for managing the users in the database.  
 Request and responce content type is in JSON.  
-Server: [http://localhost:8080](http://localhost:8080/api/users)
+Server: [http://localhost:8080](http://localhost:8080)
 
-Create a new User: 
+Create a new User: 
 
     /api/new_user
 
@@ -70,7 +71,7 @@ List all users:
 
     /api/users
 
->  Response: 200 OK
+>  Response: 200 OK
 > 
 >     [	
 >     	{
@@ -93,15 +94,15 @@ List all users:
 >         }
 >     ]
 
-List user by ID: 
+List user by ID: 
 
     /api/users/user/id={int}
 
-Update a User: 
+Update a User: 
 
     /api/users/user/id={int}
 
->  Example payload: Body
+>  Example payload: Body
 > 
 >     {
 >       "first_name": "Tony",
@@ -118,63 +119,65 @@ Update a User: 
 >       "username": "avenger"
 >     }
 
-Delete a User: 
+Delete a User: 
 
     /api/users/user/delete/id={int}
 
 Deployments
 -----------
 
+
 ### Local install
 
-
-**Prerequisites:**   
+**Prerequisites:**   
 _Python3, pip3, Virtualenv_
 
 To install and run the app locally follow the below instruction:
 
 1.  Clone the repository on your local machine.
-2.  For Linux and Mac run the setup.sh bash script: _./setup.sh_
-3.  For Windows: 
+2.  For Linux and Mac run the setup.sh bash script: _./setup.sh_
+3.  For Windows: 
     1.  Install virtualenv: _pip install virtualenv_
-    2.  Create virtual environment: _virtualenv .env_
+    2.  Create virtual environment: _virtualenv .env_
     3.  Activate virtualenv: _\\.env\\scripts\\activate_
     4.  Install the required packages: _pip install -r requirements.txt_
-4.  Start the app: python _app.py_
-5.  Open the application in the browser: [http://localhost:8080](http://localhost:8080)
+4.  Start the app: python _app.py_
+5.  Open the application in the browser: [http://localhost:8080](http://localhost:8080)
 
 ### Deploy the application in Docker container
 
+* * *
 
 Dockerization of the application streamlines the deployment and management  
 by providing a consistent and efficient runtime environment.  
 It's helping with dependencies, environment inconsistencies, and scalability.
 
-**Prerequisites:**   
+**Prerequisites:**   
 _Docker_
 
 To run the app in docker you will need to build the docker image.
 
-1.  Clone the repository on local or remote machine.
-2.  Run the following command to build the image:  _docker build . -t user\_api\_app_
-3.  Start the app with docker: _docker run --name FLASK\_APP -p 8080:8080 -v .:/app user\_api\_app_
-4.  Open the application in the browser: [http://localhost:8080](http://localhost:8080)
+1.  Clone the repository on local or remote machine.
+2.  Run the following command to build the image:  _docker build . -t user\_api\_app_
+3.  Start the app with docker: _docker run --name FLASK\_APP -p 8080:8080 -v .:/app user\_api\_app_
+4.  Open the application in the browser: [http://localhost:8080](http://localhost:8080)
 
-### Deploy the application in a Kuberneties Cluster
+### Deploy the application in Kuberneties Cluster
 
+* * *
 
 The benefits of using Kubernetes is to automate the deployment, scaling,  
 and management of applications running in containers.  
 It provides a platform for orchestrating and coordinating containers across a cluster of machines.
 
-**Prerequisites:**   
+**Prerequisites:**   
 _Docker, Minikube_
 
-To run the app in a Kuberneties cluster you will create a single cluster node for the deployment and the servies. 
+To run the app in a Kuberneties cluster you will create a single cluster node for the deployment and the servies. 
 
-1.  Clone the repository on local or remote machine.
+1.  Clone the repository on local or remote machine.
 2.  Install [Docker](https://docs.docker.com/engine/install/) and [Minikube](https://minikube.sigs.k8s.io/docs/start/).
-3.  Set an alias for the minikube to ease with the kubectl commands: 
+3.  Set an alias for the minikube to ease with the kubectl commands: 
     
         alias kubectl="minikube kubectl --"
     
@@ -186,7 +189,7 @@ To run the app in a Kuberneties cluster you will create a single cluster node fo
     
         kubectl apply -f Kuberneties/deploy-user-api-app.yaml
     
-    Kuberneties will create the deployment and will start one replica pod. Kuberneties will create the service that will expose the port 8080 from the container to the cluster.
+    Kuberneties will create the deployment and will start one replica pod and the service that will expose the port 8080.
     
     *   Confirm that the pod is running.
         
@@ -208,12 +211,51 @@ To run the app in a Kuberneties cluster you will create a single cluster node fo
 7.  Test the connection:
     
         $ nc -zv localhost 8080
+
         Connection to localhost port 8080 [tcp/http-alt] succeeded!
     
-8.  The application is now available at [http://localhost:8080](http://localhost:8080)
+8.  The application is now available at [http://localhost:8080](http://localhost:8080)
+
+Continuous integration / Continuous deployment
+-----------
+
+
+This GitHub project has been setup for CI/CD processes with the use of GitGub Actions. 
+
+Requirements to run the workflow:
+
+1.  Secrets and Variables configured in GitHub settings as follows:  
+    Secrets:    DOCKER\_PASSWORD = <your docker hub password>  
+    Variables:
+    1.  DOCKER\_USERNAME = <your docker hub username>
+    2.  PLATFORM = \[<linux/arm/v8>, <linux/amd64>, <other>\]  
+        Specify the platfrom for the image that needs to be build on. (currently configured to linux/arm64/v8)
+
+The pipline runs in three stages using the CICD.yaml file located at **.github/workflows/** directory.
+
+**Stages 1: Build**  
+This stage builds the python API app code and tests the application.  
+Python installs the dependencies packages from the requirements.txt file.   
+Completing of this stage will ensure the code is checked and the application is running ok before the next stage.
+
+**Stages 2: Dockerize**  
+This stage builds a Docker image of the API app using a Dockerfile.  
+The docker image is published to my public DockerHub repository [mmark0v/user\_api-app](https://hub.docker.com/repository/docker/mmark0v/user_api_app)   
+The repository is configured as variable so you can provide your own repository variables.   
+Once this stage is complete the new code is pushed to a new docker image with tag: _latest_
+
+**Stages 3: Deploy**  
+This stage is deploying the API app to Kuberneties cluster.   
+At this stage I'm using Minikube with locally build container image.   
+Deployment is sucesfull once the application is reachable on port 8080
+
+Each stage can also be run manually by running each one of the workflows in the Actions.   
+.github/workflows/[deploy\_app.yaml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/deploy_app.yaml "deploy_app.yaml")  
+.github/workflows/[docker\_publish.yml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/docker_publish.yml "docker_publish.yml")  
+.github/workflows/[python-app.yml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/python-app.yml "python-app.yml")
 
   
- 
+ 
 
 * * *
 

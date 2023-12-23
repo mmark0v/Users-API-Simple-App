@@ -45,14 +45,15 @@
 
 
 
-        <h3>&nbsp;</h3>
+        <h1>&nbsp;</h1>
+
 
 <h2>About</h2>
 
 <hr />
 <p>This simple python app is build on the Flask web framwork.</p>
 
-<p>The purpose of the app is to manage simple user database through exposed API endpoints for CRUD operations.</p>
+<p>The function of the app is to manage simple user database through exposed API endpoints for CRUD operations.</p>
 
 <p>&nbsp;</p>
 
@@ -94,7 +95,7 @@ Werkzeug==3.0.1</p>
 
 <p>They are five endpoints exposed for managing the users in the database.<br />
 Request and responce content type is in JSON.<br />
-Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a></p>
+Server:&nbsp;<a href="http://localhost:8080">http://localhost:8080</a></p>
 
 <p>Create a new User:&nbsp;</p>
 
@@ -203,7 +204,12 @@ Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a>
 
 <p>&nbsp;</p>
 
-<h2>Instalation</h2>
+<p>&nbsp;</p>
+
+<h2>Deployments</h2>
+
+<hr />
+<h3>&nbsp;</h3>
 
 <h3>Local install</h3>
 
@@ -232,7 +238,7 @@ Server:&nbsp;<a href="http://localhost:8080/api/users">http://localhost:8080</a>
 
 <p>&nbsp;</p>
 
-<h3>Run the application in Docker container</h3>
+<h3>Deploy the application in Docker container</h3>
 
 <hr />
 <p>Dockerization of the application streamlines the deployment and management<br />
@@ -255,7 +261,7 @@ It&#39;s helping with dependencies, environment inconsistencies, and scalability
 
 <p>&nbsp;</p>
 
-<h3>Run the application in a Kuberneties Cluster</h3>
+<h3>Deploy the application in Kuberneties Cluster</h3>
 
 <hr />
 <p>The benefits of using Kubernetes is to automate the deployment, scaling,<br />
@@ -280,9 +286,9 @@ It provides a platform for orchestrating and coordinating containers across a cl
 	</li>
 	<li>Deploy the application to the default namespace by using the deployment yaml file located in the repository:
 	<pre>
-<code class="language-bash">kubectl apply -f user-api-app-deployment.yaml</code></pre>
+<code class="language-bash">kubectl apply -f Kuberneties/deploy-user-api-app.yaml</code></pre>
 
-	<p>Kuberneties will create the deployment and will start one replica pod.</p>
+	<p>Kuberneties will create the deployment and will start one replica pod and the service that will expose the port 8080.</p>
 
 	<ul>
 		<li>
@@ -293,14 +299,6 @@ It provides a platform for orchestrating and coordinating containers across a cl
 NAME                            READY   STATUS    RESTARTS   AGE
 user-api-app-58598c4b89-86k6k   1/1     Running   0          51s</code></pre>
 		</li>
-	</ul>
-	</li>
-	<li>Deploy the application services to the default namespace by using the services yaml file located in the repository:
-	<pre>
-<code class="language-bash">kubectl apply -f user-api-app-service.yaml</code></pre>
-	Kuberneties will create the service that will expose the port 8080 from the container to the cluster.
-
-	<ul>
 		<li>
 		<p>Confirm that the <em>user-api-app</em> service was created and running.</p>
 
@@ -324,10 +322,17 @@ Connection to localhost port 8080 [tcp/http-alt] succeeded!</code></pre>
 	<li>The application is now available at&nbsp;<a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
 </ol>
 
+<p>&nbsp;</p>
 
 
-<p>V1.2</p>
-</div>
+<p>&nbsp;</p>
+
+
+<p>&nbsp;</p>
+
+<hr />
+<p>2023 AppV1.2 - <a href="https://github.com/mmark0v" target="_blank">mmark0v</a></p>
+
       
 </body>
 </html>
