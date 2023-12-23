@@ -120,7 +120,7 @@ jobs:
     - name: Start minikube
       uses: medyagh/setup-minikube@master
 
-    - name: Try the cluster !
+    - name: Check the cluster !
       run: kubectl get pods -A
 
     - name: Build image
@@ -133,9 +133,9 @@ jobs:
     
     - name: Deploy to minikube
       run:
-        minikube kubectl -- apply -f deploy-app-local.yaml
+        minikube kubectl -- apply -f Kuberneties/deploy-app-local.yaml
 
-    - name: Test service URLs
+    - name: Test service URL
       run: |
         minikube service list
         minikube kubectl -- get po

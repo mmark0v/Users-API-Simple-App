@@ -30,7 +30,7 @@ jobs:
     
     - name: Deploy to minikube
       run:
-        minikube kubectl -- apply -f deploy-app-local.yaml
+        minikube kubectl -- apply -f Kuberneties/deploy-app-locally.yaml
 
     - name: Test service URLs
       run: |

@@ -44,3 +44,32 @@ items:
 kind: List
 metadata:
   resourceVersion: ""
+---
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: user-api-app
+  name: user-api-app
+  namespace: default
+  resourceVersion: "9792"
+spec:
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: user-api-app
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
