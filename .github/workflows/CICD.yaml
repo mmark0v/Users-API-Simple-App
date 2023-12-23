@@ -112,6 +112,7 @@ jobs:
   minikube_deploy:
     # Deploy locally to minikube (require the image to be re-build locally)
     runs-on: ubuntu-latest
+    needs: docker_build
     name: build app and deploy to minikube
     steps:
     - uses: actions/checkout@v2
@@ -143,6 +144,7 @@ jobs:
         echo "------------------ opening the service ------------------"
         minikube kubectl -- port-forward services/user-api-app 8080:8080 &
         echo "------------------ testing the server ------------------"
+        sleep 5; jobs
         nc -zv localhost 8080  
         if [ $? = "0" ]; then echo -e "\n\n------------------ Deployment Succesfull ------------------\n\n";fi                
   
