@@ -1,4 +1,4 @@
-name: Build Python app
+name: Build and Test Python App
 
 on:
   workflow_dispatch

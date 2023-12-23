@@ -1,4 +1,4 @@
-name: Docker_build_push
+name: Build and Push to Docker Hub
 
 on:
   workflow_dispatch

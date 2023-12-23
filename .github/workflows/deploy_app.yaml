@@ -1,0 +1,34 @@
+name: Deploy App To Minikibe
+
+on:
+  workflow_dispatch
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+
+jobs:
+  minikube_deploy:
+    runs-on: ubuntu-latest
+    name: build app and deploy to minikube
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
+
+    - name: Try the cluster !
+      run: kubectl get pods -A
+    
+    - name: Deploy to minikube
+      run:
+        kubectl apply -f user-api-app-deployment.yaml
+        kubectl apply -f user-api-app-service.yaml
+
+    - name: Test service URLs
+      run: |
+        minikube service list
+        echo "------------------ opening the service ------------------"
+        kubectl port-forward services/user-api-app 8080:8080 &
+        echo "------------------ testing the server ------------------"
+        nc -zv localhost 8080        
