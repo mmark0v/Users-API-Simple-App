@@ -44,7 +44,7 @@ items:
 kind: List
 metadata:
   resourceVersion: ""
-
+---
 
 apiVersion: v1
 kind: Service

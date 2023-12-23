@@ -24,7 +24,7 @@ jobs:
       run: |
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
-        docker build -f ./Dockerfile -t local/user-api-app .
+        docker build -f ./Dockerfile -t local/user_api_app .
         echo -n "verifying images:"
         docker images        
     
