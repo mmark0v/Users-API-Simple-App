@@ -22,11 +22,13 @@ jobs:
     
     - name: Deploy to minikube
       run:
-        minikube kubectl -- apply -f user-api-app-deployment.yaml -f user-api-app-service.yaml
+        alias kubectl="minikube kubectl --"
+        kubectl apply -f user-api-app-deployment.yaml -f user-api-app-service.yaml
 
     - name: Test service URLs
       run: |
         minikube service list
+        sleep 10; kubectl get po
         echo "------------------ opening the service ------------------"
         kubectl port-forward services/user-api-app 8080:8080 &
         echo "------------------ testing the server ------------------"
