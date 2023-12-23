@@ -237,13 +237,13 @@ Requirements to run the workflow:
 
 Secrets: 
 
-    DOCKER\_PASSWORD = \[your docker hub password\]
+    DOCKER\_PASSWORD = [your docker hub password]
 
 Variables:
 
-    DOCKER\_USERNAME = \[your docker hub username\]
+    DOCKER\_USERNAME = [your docker hub username]
     
-    PLATFORM = \[linux/arm/v8, linux/amd64, other\]
+    PLATFORM = [linux/arm/v8, linux/amd64, other]
 
 Specify the platfrom for the image that needs to be build on. (currently configured to linux/arm64/v8)
 
