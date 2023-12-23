@@ -19,10 +19,18 @@ jobs:
 
     - name: Try the cluster !
       run: kubectl get pods -A
+
+    - name: Build image
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        docker build -f ./Dockerfile -t local/user-api-app .
+        echo -n "verifying images:"
+        docker images        
     
     - name: Deploy to minikube
       run:
-        minikube kubectl -- apply -f user-api-app-deployment.yaml -f user-api-app-service.yaml
+        minikube kubectl -- apply -f deploy-app-local.yaml
 
     - name: Test service URLs
       run: |
