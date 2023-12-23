@@ -11,10 +11,11 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build_python_app:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.11
@@ -39,6 +40,3 @@ jobs:
       run: |
         python ./app.py -l & pid=$!; sleep 10; nc -zv localhost 8080; kill -9 $pid 
     
-    # - name: Test with pytest
-    #   run: |
-    #     pytest
