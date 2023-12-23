@@ -216,11 +216,11 @@ To run the app in a Kuberneties cluster you will create a single cluster node fo
     
 8.  The application is now available at [http://localhost:8080](http://localhost:8080)
 
-  
+  <br><br><br>
 
 Continuous integration / Continuous deployment
+----------------------------------------------
 
------------
 
   
   
@@ -247,12 +247,13 @@ Variables:
 
 Specify the platfrom for the image that needs to be build on. (currently configured to linux/arm64/v8)
 
-  ---
+  <br><br>
+
+
 
 The pipline runs in three stages using the CICD.yaml file located at **.github/workflows/** directory.
 
   
-
 **Stages 1: Build**
 
 > This stage builds the python API app code and tests the application.
