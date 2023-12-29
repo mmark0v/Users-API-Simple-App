@@ -39,6 +39,27 @@ userFields = {
     'last_name':fields.String,
  }
  
+
+
+# Prometheus metrics
+
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    '/metrics': make_wsgi_app()
+})
+
+REQUEST_COUNT = Counter(
+    'app_request_count',
+    'Application Request Count',
+    ['method', 'endpoint', 'http_status']
+)
+REQUEST_LATENCY = Histogram(
+    'app_request_latency_seconds',
+    'Application Request Latency',
+    ['method', 'endpoint']
+)
+####################
+
+
  # Providing a home page from a static html template
 @app.route('/')
 def home():
@@ -120,48 +141,7 @@ def swagger():
         return jsonify(json.load(f))
 
 
-# Graphana integration
 
-USER_ID = 1348473
-API_KEY = "glc_eyJvIjoiMTAxODQ0MiIsIm4iOiJzdGFjay04MTk3NzEtaW50ZWdyYXRpb24tdXNlci1hcGktYXBwIiwiayI6Ijc0bXEzdllrZ2tJMTBSNjZ4TUs0eDYxcyIsIm0iOnsiciI6InByb2QtZXUtd2VzdC0yIn19"
-
-body = 'test,bar_label=abc,source=grafana_cloud_docs metric=35.2'
-
-response = requests.post('https://influx-prod-24-prod-eu-west-2.grafana.net/api/v1/push/influx/write', 
-                         headers = {
-                           'Content-Type': 'text/plain',
-                         },
-                         data = str(body),
-                         auth = (USER_ID, API_KEY)
-)
-
-status_code = response.status_code
-
-print(status_code)
-#######################
-
-
-
-# Prometheus metrics
-
-app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
-    '/metrics': make_wsgi_app()
-})
-
-REQUEST_COUNT = Counter(
-    'app_request_count',
-    'Application Request Count',
-    ['method', 'endpoint', 'http_status']
-)
-REQUEST_LATENCY = Histogram(
-    'app_request_latency_seconds',
-    'Application Request Latency',
-    ['method', 'endpoint']
-)
-
-
-
-####################
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
