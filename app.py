@@ -3,8 +3,15 @@ from flask_restful import Resource, Api, marshal_with, fields
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger import swagger
 from flask_swagger_ui import get_swaggerui_blueprint
+
+from prometheus_client import make_wsgi_app, Counter, Histogram
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+import time
+
 import os
+import requests
 import json
+import base64
 
 app = Flask(__name__)
 api = Api(app)
@@ -36,6 +43,10 @@ userFields = {
 @app.route('/')
 def home():
    return render_template('index.html')
+   start_time = time.time()
+   REQUEST_COUNT.labels('GET', '/', 200).inc()
+   REQUEST_LATENCY.labels('GET', '/').observe(time.time() - start_time)
+   
 
 # Defiinng our API resource methods 
 class Users(Resource): 
@@ -109,6 +120,48 @@ def swagger():
         return jsonify(json.load(f))
 
 
+# Graphana integration
+
+USER_ID = 1348473
+API_KEY = "glc_eyJvIjoiMTAxODQ0MiIsIm4iOiJzdGFjay04MTk3NzEtaW50ZWdyYXRpb24tdXNlci1hcGktYXBwIiwiayI6Ijc0bXEzdllrZ2tJMTBSNjZ4TUs0eDYxcyIsIm0iOnsiciI6InByb2QtZXUtd2VzdC0yIn19"
+
+body = 'test,bar_label=abc,source=grafana_cloud_docs metric=35.2'
+
+response = requests.post('https://influx-prod-24-prod-eu-west-2.grafana.net/api/v1/push/influx/write', 
+                         headers = {
+                           'Content-Type': 'text/plain',
+                         },
+                         data = str(body),
+                         auth = (USER_ID, API_KEY)
+)
+
+status_code = response.status_code
+
+print(status_code)
+#######################
+
+
+
+# Prometheus metrics
+
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    '/metrics': make_wsgi_app()
+})
+
+REQUEST_COUNT = Counter(
+    'app_request_count',
+    'Application Request Count',
+    ['method', 'endpoint', 'http_status']
+)
+REQUEST_LATENCY = Histogram(
+    'app_request_latency_seconds',
+    'Application Request Latency',
+    ['method', 'endpoint']
+)
+
+
+
+####################
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
