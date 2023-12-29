@@ -63,10 +63,11 @@ REQUEST_LATENCY = Histogram(
  # Providing a home page from a static html template
 @app.route('/')
 def home():
-   return render_template('index.html')
    start_time = time.time()
    REQUEST_COUNT.labels('GET', '/', 200).inc()
-   REQUEST_LATENCY.labels('GET', '/').observe(time.time() - start_time)
+   REQUEST_LATENCY.labels('GET', '/').observe(time.time() - start_time),
+   return render_template('index.html')
+
    
 
 # Defiinng our API resource methods 
