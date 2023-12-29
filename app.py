@@ -65,7 +65,7 @@ REQUEST_LATENCY = Histogram(
 def home():
    start_time = time.time()
    REQUEST_COUNT.labels('GET', '/', 200).inc()
-   REQUEST_LATENCY.labels('GET', '/').observe(time.time() - start_time),
+   REQUEST_LATENCY.labels('GET', '/').observe(time.time() - start_time)
    return render_template('index.html')
 
    
@@ -74,12 +74,18 @@ def home():
 class Users(Resource): 
     @marshal_with(userFields)
     def get(self):
+        start_time = time.time()
+        REQUEST_COUNT.labels('GET', '/api/users', 200).inc()
+        REQUEST_LATENCY.labels('GET', '/api/users').observe(time.time() - start_time)
         users = dbUsers.query.all()
         return users
 
 class NewUser(Resource):   
     @marshal_with(userFields)
     def post(self):
+        start_time = time.time()
+        REQUEST_COUNT.labels('POST', '/api/new_user', 200).inc()
+        REQUEST_LATENCY.labels('POST', '/api/new_user').observe(time.time() - start_time)
         data = request.json
         user = dbUsers(username=data['username'],first_name=data['first_name'],last_name=data['last_name'])
         db.session.add(user)
@@ -91,11 +97,17 @@ class NewUser(Resource):
 class User(Resource):
     @marshal_with(userFields)
     def get(self, pk):
+        start_time = time.time()
+        REQUEST_COUNT.labels('GET', '/api/users/user/', 200).inc()
+        REQUEST_LATENCY.labels('GET', '/api/users/user/').observe(time.time() - start_time)
         user = dbUsers.query.filter_by(id=pk).first()
         return user 
     
     @marshal_with(userFields)
     def put(self, pk):
+        start_time = time.time()
+        REQUEST_COUNT.labels('PUT', '/', 200).inc()
+        REQUEST_LATENCY.labels('PUT', '/').observe(time.time() - start_time)
         data = request.json
         user = dbUsers.query.filter_by(id=pk).first()
         user.username = data['username']
@@ -108,6 +120,9 @@ class User(Resource):
 class Userdel(Resource):
     @marshal_with(userFields)
     def delete(self, pk):
+        start_time = time.time()
+        REQUEST_COUNT.labels('DELETE', '/api/users/user/delete/', 200).inc()
+        REQUEST_LATENCY.labels('DELETE', '/api/users/user/delete/').observe(time.time() - start_time)
         user = dbUsers.query.filter_by(id=pk).first()
         db.session.delete(user)
         db.session.commit()
@@ -138,6 +153,9 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 @app.route('/swagger.json')
 def swagger():
+    start_time = time.time()
+    REQUEST_COUNT.labels('GET', '/swagger.json', 200).inc()
+    REQUEST_LATENCY.labels('GET', '/swagger.json').observe(time.time() - start_time)
     with open('swagger.json', 'r') as f:
         return jsonify(json.load(f))
 
