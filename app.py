@@ -145,7 +145,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
     config={
-        'app_name': "Users Database API"
+        'app_name': "Users API App"
     }
 )
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
@@ -153,9 +153,6 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 @app.route('/swagger.json')
 def swagger():
-    start_time = time.time()
-    REQUEST_COUNT.labels('GET', '/swagger.json', 200).inc()
-    REQUEST_LATENCY.labels('GET', '/swagger.json').observe(time.time() - start_time)
     with open('swagger.json', 'r') as f:
         return jsonify(json.load(f))
 
