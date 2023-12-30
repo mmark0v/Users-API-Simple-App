@@ -8,6 +8,7 @@ This simple python app is build on the Flask web framwork.
 
 The function of the app is to manage simple user database through exposed API endpoints for CRUD operations.
 
+<br><br>
 Documentation
 -------------
 
@@ -123,6 +124,7 @@ Delete a User:
 
     /api/users/user/delete/id={int}
 
+<br><br>
 Deployments
 -----------
 
@@ -237,11 +239,11 @@ Requirements to run the workflow:
 
 Secrets: 
 
-    DOCKER\_PASSWORD = [your docker hub password]
+    DOCKER_PASSWORD = [your docker hub password]
 
 Variables:
 
-    DOCKER\_USERNAME = [your docker hub username]
+    DOCKER_USERNAME = [your docker hub username]
     
     PLATFORM = [linux/arm/v8, linux/amd64, other]
 
@@ -299,12 +301,20 @@ Each stage can also be run manually by running each one of the workflows in the 
 
 .github/workflows/[python-app.yml](https://github.com/mmark0v/Users-API-Simple-App/blob/main/.github/workflows/python-app.yml  "python-app.yml")
 
-  
+<br><br>
 
-  
+  Monitoring
+----------------------------------------------
+The app generates HTTP metrics which are then loaded in a Prometheus server from where Graphana is used to visulise the metrics.
+<br>
+You can find the Graphana dashboard here:
+[Prometheus / Graphana - Dashboard](https://mmark0v.grafana.net/public-dashboards/55b48ee869ed4f1aba96f6d95795397d)
 
+
+<br>
+Thank you for looking at my simple CI/CD project.<br>
+Malin Markov
+  
+<br><br>
 * * *
-
-  
-
-2023 AppV1.2 - [mmark0v](https://github.com/mmark0v)
+2023 AppV1.1 - [mmark0v](https://github.com/mmark0v)
